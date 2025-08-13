@@ -1,6 +1,7 @@
 // Utility functions to sync wallet data with backend
 
-const API_BASE = 'http://localhost:5000';
+// const API_BASE = 'http://localhost:5000';
+const API_BASE =process.env.REACT_APP_API_URL
 
 // Sync all wallet data from localStorage to database
 export const syncWalletDataToDB = async () => {

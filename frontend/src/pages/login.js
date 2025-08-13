@@ -50,6 +50,7 @@ export default function Login() {
 
     const fetchAndSyncWalletData = async () => {
         try {
+            // alert("Syncing wallet data... This may take a moment.");
             const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/wallet`, {
                 credentials: 'include',
                 headers: {
@@ -59,6 +60,7 @@ export default function Login() {
 
             if (response.ok) {
                 const data = await response.json();
+                console.log('Wallet data fetched:', data);
                 if (data.success && data.walletData) {
                     localStorage.setItem("wallet.user.onlineBalance", data.walletData.onlineBalance.toString());
                     localStorage.setItem("wallet.user.offlineBalance", data.walletData.offlineBalance.toString());
@@ -75,6 +77,7 @@ export default function Login() {
 
     const handleAuthSuccess = async () => {
         setLoading(true);
+        // alert("Authentication successful! Syncing your wallet data...");
         
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/auth/user`, {
@@ -83,7 +86,7 @@ export default function Login() {
                     'Content-Type': 'application/json',
                 }
             });
-            
+            console.log('Auth response:', response);
             if (!response.ok) {
                 throw new Error('Authentication failed');
             }
@@ -107,9 +110,9 @@ export default function Login() {
                 };
                 
                 Object.entries(walletDefaults).forEach(([key, defaultValue]) => {
-                    if (!localStorage.getItem(key)) {
+                    
                         localStorage.setItem(key, defaultValue);
-                    }
+                    
                 });
                 
                 await fetchAndSyncWalletData();

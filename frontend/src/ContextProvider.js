@@ -156,15 +156,15 @@ export default function ContextProvider() {
     const logout = async () => {
         console.log("ContextProvider logout called");
         
-        // Sync final wallet data to database before logout
-        if (loggedin && initialLoadComplete) {
-            try {
-                console.log("Syncing final wallet data to database...");
-                await syncWalletDataToDB();
-            } catch (error) {
-                console.error("Failed to sync wallet data to DB on logout:", error);
-            }
-        }
+        // // Sync final wallet data to database before logout
+        // if (loggedin && initialLoadComplete) {
+        //     try {
+        //         console.log("Syncing final wallet data to database...");
+        //         await syncWalletDataToDB();
+        //     } catch (error) {
+        //         console.error("Failed to sync wallet data to DB on logout:", error);
+        //     }
+        // }
         
         setLoggedin(false);
         setUser(null);
